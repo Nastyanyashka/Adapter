@@ -14,17 +14,14 @@ namespace Adapter
         public DigitalClock() { }
 
         public int Seconds { get { return seconds; } set { 
-                if (value<0 ||  value > 60) throw new ArgumentOutOfRangeException();
+                if (value<0 ||  value > 59) throw new ArgumentOutOfRangeException();
                 seconds = value; } }
         public int Minutes { get { return minutes;} set {
 
-                if (value < 0 || value > 60) throw new ArgumentOutOfRangeException();
-
+                if (value < 0 || value > 59) throw new ArgumentOutOfRangeException();
                 seconds = value; } }
         public int Hours { get { return hours;} set {
                 if (value < 0 || value > 12) throw new ArgumentOutOfRangeException();
-
-
                 hours = value; } }
     }
 }

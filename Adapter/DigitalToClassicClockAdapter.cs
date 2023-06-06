@@ -15,13 +15,21 @@ namespace Adapter
         public DigitalToClassicClockAdapter(DigitalClock digitalClock) {
             this.digitalClock = digitalClock;
         }
+        void CalculateAngles()
+        {
+            angleSecondHand = 6 * digitalClock.Seconds;
+            angleMinuteHand = 6 * digitalClock.Minutes;
+            angleMinuteHand += digitalClock.Minutes / 10;
+            angleHourHand = (digitalClock.Hours * 30) % 360;
+            angleHourHand += digitalClock.Minutes / 2;
+            angleHourHand += digitalClock.Seconds / 120;
+        }
         public int SecondHand
         {
             get { return digitalClock.Seconds; }
             set
             {
                 if (value < 0 || value > 60) throw new ArgumentOutOfRangeException();
-                angleSecondHand = 6 * value;
                 digitalClock.Seconds = value;
             }
         }
@@ -31,8 +39,6 @@ namespace Adapter
             set
             {
                 if (value < 0 || value > 60) throw new ArgumentOutOfRangeException();
-
-                angleMinuteHand = 6 * value;
                 digitalClock.Minutes = value;
             }
         }
@@ -42,8 +48,6 @@ namespace Adapter
             set
             {
                 if (value < 0 || value > 12) throw new ArgumentOutOfRangeException();
-
-                angleHourHand = (30 * value) % 360;
                 digitalClock.Hours = value;
             }
         }
